@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE employees [
+    <!ELEMENT employees (id, name, email)>
+    <!ELEMENT id (#PCDATA)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT email (#PCDATA)>
+
+    <!ENTITY placeholer "Chingari">
+]>
+
+<employees>
+    <id>3524</id>
+    <name>&placeholer;</name>
+    <email>usman@gmail.com</email>
+</employees>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<students-main xmlns:a="3524-2023" xmlns:b="3524-2023">
+    <a:student>
+        <name>Usman Nadeem</name>
+        <email>usmanN051@gmail.com</email>
+        <program>BS DSWT</program>
+    </a:student>
+
+    <b:student>
+        <name>Usman Nadeem</name>
+        <email>usmanN051@gmail.com</email>
+        <program>BS DSWT</program>
+    </b:student>
+</students-main>

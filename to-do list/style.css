@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.todo-main{
+    background: linear-gradient(to right, #7b4397, #dc2430);
+    height: auto;
+    width: 250px;
+    margin: 20% auto auto auto;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.todo-main input{
+    width: 90%;
+    border: 1px solid ghostwhite;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.todo-main button{
+
+    width: 99%;
+    border: 1px solid ghostwhite;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.todo-main h2{
+    text-align: center;
+    color: white;
+}
+
+#resultList{
+    color: white;
+}

@@ -2,7 +2,7 @@
 session_start();
 // Database Connection 
 // REMOVE PASSWORD IF USING XAMPP
-$register_connection = mysqli_connect("localhost","root","","facebook");
+$register_connection = mysqli_connect("localhost","root","root","user_data");
 // Connection verification
 if (!$register_connection) {
     echo"<h1>DATABASE NOT CONNECTED</h1>";}
@@ -88,7 +88,7 @@ if (isset($_POST['login_btn'])) {
 
     // login data verification from DB
     $login_query = "
-        SELECT * FROM registration 
+        SELECT * FROM data 
         WHERE user_name = '$login_username' 
         AND user_password = '$login_password'
     ";

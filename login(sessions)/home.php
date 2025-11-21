@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 // DB connection  
-$register_connection = mysqli_connect("localhost", "root", "", "facebook");  
+$register_connection = mysqli_connect("localhost", "root", "root", "user_data");  
 if (!$register_connection) {
     die("<h1>DATABASE NOT CONNECTED</h1>");
 }  
@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_name'])) {
 $user_name = $_SESSION['user_name'];
 
 // Fetch all users
-  $all_users_query = "SELECT * FROM registration";
+  $all_users_query = "SELECT * FROM data";
   $all_users_result = mysqli_query($register_connection, $all_users_query);
 
 // Logout btn
@@ -47,8 +47,6 @@ $user_name = $_SESSION['user_name'];
     </form>
 </div>
 
-
-
 <div class="container mx-auto px-4">
 <!-- ALL USERS LIST -->
  <div class="card bg-base-100 shadow-xl p-6">
@@ -62,12 +60,11 @@ $user_name = $_SESSION['user_name'];
                         <th>Last</th>
                         <th>Email</th>
                         <th>Username</th>
-                        <th>Password</th>
                         <th>Actions</th>
-
-
+                        <!-- <th>Password</th> -->
                     </tr>
                 </thead>
+
                 <tbody>
                     <?php 
                     while ($row = mysqli_fetch_assoc($all_users_result)) { ?>
@@ -77,10 +74,10 @@ $user_name = $_SESSION['user_name'];
                             <td><?php echo $row['last_name']; ?></td>
                             <td><?php echo $row['user_email']; ?></td>
                             <td><?php echo $row['user_name']; ?></td>
-                            <td><?php echo $row['user_password']; ?></td>
+                            <!-- <td><?php echo $row['user_password']; ?></td> -->
                             <td>
                               <a href="view.php?id=<?= $row['id']?>" class="btn btn-sm btn-info">View</a>
-                              <a href="update.php?id=<?= $row['id']?>" class="btn btn-sm btn-warning">Update</a>
+                              <a href="edit.php?id=<?= $row['id']?>" class="btn btn-sm btn-warning">Update</a>
                               <a href="delete.php?id=<?= $row['id']?>" class="btn btn-sm btn-error">Delete</a>
                             </td>                            
                         </tr>
@@ -91,18 +88,5 @@ $user_name = $_SESSION['user_name'];
   </div>
 </div>
 
-<script>
-        function togglePass() {
-            const passText = document.getElementById("passwordText");
-            const btn = document.getElementById("ShowPassBtn");
-            if (passText.classList.contains("blurtxt")) {
-                passText.classList.remove("blurtxt");
-                btn.textContent = "Hide Password";
-            } else {
-                passText.classList.add("blurtxt");
-                btn.textContent = "Show Password";
-            }
-        }
-</script>
 </body>
 </html>

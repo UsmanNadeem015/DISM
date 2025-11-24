@@ -1,10 +1,8 @@
 <?php
 session_start(); 
-// DB connection  
-$register_connection = mysqli_connect("localhost", "root", "root", "user_data");  
-if (!$register_connection) {
-    die("<h1>DATABASE NOT CONNECTED</h1>");
-}  
+// DB connection
+include("./db-xampp.php");
+
 // Redirect if not logged in 
 if (!isset($_SESSION['user_name'])) {  
     header("Location: login.php");  
@@ -14,7 +12,7 @@ if (!isset($_SESSION['user_name'])) {
 $user_name = $_SESSION['user_name'];
 
 // Fetch all users
-  $all_users_query = "SELECT * FROM data";
+  $all_users_query = "SELECT * FROM registration";
   $all_users_result = mysqli_query($register_connection, $all_users_query);
 
 // Logout btn
@@ -67,7 +65,8 @@ $user_name = $_SESSION['user_name'];
 
                 <tbody>
                     <?php 
-                    while ($row = mysqli_fetch_assoc($all_users_result)) { ?>
+                    while ($row = mysqli_fetch_assoc($all_users_result))
+                    { ?>
                         <tr>
                             <td><?php echo $row['id']; ?></td>
                             <td><?php echo $row['first_name']; ?></td>
@@ -78,7 +77,12 @@ $user_name = $_SESSION['user_name'];
                             <td>
                               <a href="view.php?id=<?= $row['id']?>" class="btn btn-sm btn-info">View</a>
                               <a href="edit.php?id=<?= $row['id']?>" class="btn btn-sm btn-warning">Update</a>
-                              <a href="delete.php?id=<?= $row['id']?>" class="btn btn-sm btn-error">Delete</a>
+                              <?php if ($row['user_name'] !== $user_name) 
+                              {?>
+                               <a href="delete.php?id=<?= $row['id']?>" class="btn btn-sm btn-error">Delete</a>
+                              <?php } else{?>
+                               <a href="delete.php?id=<?= $row['id']?>" class="btn btn-sm btn-error btn-disabled" >Delete</a>
+                              <?php };?>
                             </td>                            
                         </tr>
                     <?php } ?>

@@ -1,7 +1,7 @@
 <?php
-// Database Connection
-// Set password to empty if using xammp
-$register_connection = mysqli_connect("localhost","root","root","user_data");
+// DB connection
+include("./db-xampp.php");
+
 // Connection verification
 if (!$register_connection) {
     echo"<h1>DATABASE NOT CONNECTED</h1>";
@@ -91,7 +91,7 @@ $user_password = $_POST["user_password"];
 // Insert
 $register_insert = "
 INSERT INTO 
-data(first_name,last_name,user_email,user_name,user_password) 
+registration(first_name,last_name,user_email,user_name,user_password) 
 VALUES 
 ('$first_name','$last_name','$user_email','$user_name','$user_password')
 ";

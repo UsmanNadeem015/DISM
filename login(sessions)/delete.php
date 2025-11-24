@@ -1,15 +1,12 @@
 <?php
 // DB connection
-$register_connection = mysqli_connect("localhost", "root", "root", "user_data");
-if (!$register_connection) { 
-  die("DATABASE NOT CONNECTED"); 
-};
+include("./db-xampp.php");
 
 // Get ID from URL
 $id = $_GET['id'];
 
 // Fetch user data
-$user_query = mysqli_query($register_connection, "SELECT * FROM data WHERE id = $id");
+$user_query = mysqli_query($register_connection, "SELECT * FROM registration WHERE id = $id");
 $current_user = mysqli_fetch_assoc($user_query);
 
 ?>
@@ -32,7 +29,7 @@ $current_user = mysqli_fetch_assoc($user_query);
             <div class="card-actions justify-end">
                 <a class="btn btn-ghost" href="./home.php">Back to user list</a>
                 <form method="post">
-                  <button class="btn btn-error" name="del_btn">Delete Data</button>
+                  <button class="btn btn-error" name="delete_btn">Delete Data</button>
                 </form>
             </div>
         </div>
@@ -40,3 +37,12 @@ $current_user = mysqli_fetch_assoc($user_query);
 
 </body>
 </html>
+
+<?php
+if(isset($_POST['delete_btn'])){
+$delete_query = "DELETE FROM registration WHERE id = $id";
+$run_query = mysqli_query($register_connection, $delete_query);
+header("location: home.php");
+exit;
+};
+?>

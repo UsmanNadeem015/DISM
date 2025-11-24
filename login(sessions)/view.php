@@ -1,13 +1,13 @@
 <?php
-// Database Connection
-// Set password to empty if using xammp
-$register_connection = mysqli_connect("localhost","root","root","user_data");
+// DB connection
+include("./db-xampp.php");
+
 // Connection verification
 if (!$register_connection) {
     echo"<h1>DATABASE NOT CONNECTED</h1>";
 };
 $id = $_GET["id"];
-$user_fetch = "SELECT * from data WHERE id = '$id'";
+$user_fetch = "SELECT * from registration WHERE id = '$id'";
 $run_query = mysqli_query($register_connection, $user_fetch);
 $view = mysqli_fetch_assoc($run_query);
 ?>

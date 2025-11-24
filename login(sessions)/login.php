@@ -1,8 +1,8 @@
 <?php
 session_start();
-// Database Connection 
-// REMOVE PASSWORD IF USING XAMPP
-$register_connection = mysqli_connect("localhost","root","root","user_data");
+// DB connection
+include("./db-xampp.php");
+
 // Connection verification
 if (!$register_connection) {
     echo"<h1>DATABASE NOT CONNECTED</h1>";}
@@ -25,7 +25,6 @@ if (!$register_connection) {
 
 </head>
 <body class="min-h-screen flex items-center justify-center bg-base-200">
-
 <div class="card w-96 bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="text-2xl font-semibold text-center mb-4">Login</h2>
@@ -88,7 +87,7 @@ if (isset($_POST['login_btn'])) {
 
     // login data verification from DB
     $login_query = "
-        SELECT * FROM data 
+        SELECT * FROM registration 
         WHERE user_name = '$login_username' 
         AND user_password = '$login_password'
     ";

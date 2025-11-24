@@ -1,13 +1,12 @@
 <?php
 // DB connection
-$register_connection = mysqli_connect("localhost", "root", "root", "user_data");
-if (!$register_connection) { die("DATABASE NOT CONNECTED"); }
+include("./db-xampp.php");
 
 // Get ID from URL
 $id = $_GET['id'];
 
 // Fetch user data
-$user_query = mysqli_query($register_connection, "SELECT * FROM data WHERE id = $id");
+$user_query = mysqli_query($register_connection, "SELECT * FROM registration WHERE id = $id");
 $current_user = mysqli_fetch_assoc($user_query);
 
 // When update button pressed
@@ -19,7 +18,7 @@ if (isset($_POST["update_btn"])) {
     $user_password = $_POST["user_password"];
 
     $update_query = "
-        UPDATE data SET 
+        UPDATE registration SET 
             first_name = '$first_name',
             last_name = '$last_name',
             user_email = '$user_email',
@@ -53,39 +52,49 @@ if (isset($_POST["update_btn"])) {
 
       <form method="post">
         <div class="form-control mb-3">
-          <label class="label">
-            <span class="label-text">First Name</span>
-          </label>
-          <input type="text" name="first_name" placeholder="Enter new first name" class="input input-bordered"  />
-        </div>
+  <label class="label">
+    <span class="label-text">First Name</span>
+  </label>
+  <input type="text" name="first_name"
+         value="<?php echo htmlspecialchars($current_user['first_name']); ?>"
+         class="input input-bordered" />
+</div>
 
-        <div class="form-control mb-3">
-          <label class="label">
-            <span class="label-text">Last Name</span>
-          </label>
-          <input type="text" name="last_name" placeholder="Enter new last name" class="input input-bordered"  />
-        </div>
+<div class="form-control mb-3">
+  <label class="label">
+    <span class="label-text">Last Name</span>
+  </label>
+  <input type="text" name="last_name"
+         value="<?php echo htmlspecialchars($current_user['last_name']); ?>"
+         class="input input-bordered" />
+</div>
 
-        <div class="form-control mb-3">
-          <label class="label">
-            <span class="label-text">Email</span>
-          </label>
-          <input type="email" name="user_email" placeholder="Enter new email" class="input input-bordered"  />
-        </div>
+<div class="form-control mb-3">
+  <label class="label">
+    <span class="label-text">Email</span>
+  </label>
+  <input type="email" name="user_email"
+         value="<?php echo htmlspecialchars($current_user['user_email']); ?>"
+         class="input input-bordered" />
+</div>
 
-        <div class="form-control mb-3">
-          <label class="label">
-            <span class="label-text">Username</span>
-          </label>
-          <input type="text" name="user_name" placeholder="Enter new username" class="input input-bordered"  />
-        </div>
+<div class="form-control mb-3">
+  <label class="label">
+    <span class="label-text">Username</span>
+  </label>
+  <input type="text" name="user_name"
+         value="<?php echo htmlspecialchars($current_user['user_name']); ?>"
+         class="input input-bordered" />
+</div>
 
-        <div class="form-control mb-4">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <input type="password" name="user_password" placeholder="Enter new password" class="input input-bordered"  />
-        </div>
+<div class="form-control mb-4">
+  <label class="label">
+    <span class="label-text">Password</span>
+  </label>
+  <input type="text" name="user_password"
+         value="<?php echo htmlspecialchars($current_user['user_password']); ?>"
+         class="input input-bordered" />
+</div>
 
         <div class="form-control">
           <button type="submit" name="update_btn" class="btn btn-primary w-full">Update Data</button>
